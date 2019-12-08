@@ -29,6 +29,7 @@ void enqueue(struct queue* q, int item){
 int dequeue(struct queue* q){
     if(q->count == 0){
         printf("Queue is empty. Cannot act dequeue operation");
+        return -1e9;
     }
     int res = -1e9;
     if(q->count > 0){
@@ -47,24 +48,25 @@ void destroy_queue(struct queue* q){
 void display(struct queue* q){
     if(q->count == 0){
         printf("Queue is empty");
+        return;
     }
-    else{
-        int temp = q->front;
-        while(temp != q->rear){
-            printf("%d\n", q->buff[temp]);
-            temp++;
-        }
-    }
-    printf("\n");
+    int temp = q->front;
+    while(temp != q->rear){
+      printf("%d\n", q->buff[temp]);
+      temp = (temp+1) % q->buff_size;
+      }
+      printf("\n");
 }
 
 int main(){
     struct queue* q = init(16);
     enqueue(q, 5);
     enqueue(q, 10);
+    enqueue(q, 15);
     display(q);
+
     printf("%d\n", dequeue(q));
-    //printf("%d\n", dequeue(q));
+    printf("%d\n", dequeue(q));
     //display(q);
 
 return 0;
