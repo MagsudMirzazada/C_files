@@ -60,14 +60,21 @@ void display(struct queue* q){
 
 int main(){
     struct queue* q = init(16);
+
     enqueue(q, 5);
     enqueue(q, 10);
     enqueue(q, 15);
+    enqueue(q, 20);
+    enqueue(q, 25);
+
     display(q);
 
-    printf("%d\n", dequeue(q));
-    printf("%d\n", dequeue(q));
-    //display(q);
+    printf("Deqeueud: %d\n", dequeue(q));
+    printf("Dequeued: %d\n", dequeue(q));
+    display(q);
+    enqueue(q, 30);
+    enqueue(q, 35);
+    display(q);
 
 return 0;
 }
