@@ -45,6 +45,44 @@ void destroy_queue(struct queue* q){
     free(q);
 }
 
+int max_element(struct queue* q){
+  int i = q->front;
+  int max = q->buff[q->front];
+  int c = q->count;
+  while(c--){
+    if (q->buff[i] > max){
+      max = q->buff[i];
+    }
+    i = (i+1) % q->buff_size;
+  }
+  return max;
+}
+
+int min_element(struct queue* q){
+  int i = q->front;
+  int min = q->buff[q->front];
+  int c = q->count;
+  while(c--){
+    if(q->buff[i] < min){
+      min = q->buff[i];
+    }
+    i = (i+1) % q->buff_size;
+  }
+  return min;
+}
+
+int search(struct queue* q, int data){
+  int i = q->front;
+  int c = q->count;
+  while(c--){
+    if (q->buff[i] == data){
+      return i;
+    }
+    i = (i+1) % q->buff_size;
+  }
+  return -1e9;
+}
+
 void display(struct queue* q){
     if(q->count == 0){
         printf("Queue is empty");
@@ -75,6 +113,11 @@ int main(){
     enqueue(q, 30);
     enqueue(q, 35);
     display(q);
+    
+    printf("It is the max element in queue: %d\n",  max_element(q));
+    printf("It is the min element in queue: %d\n", min_element(q));
+
+    printf("The position of %d in the queue is %d", max_element(q), search(q, max_element(q)));
 
 return 0;
 }
